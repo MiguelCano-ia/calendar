@@ -93,7 +93,7 @@ export const RegisterView = () => {
           )}
         </div>
         <div className="d-grid gap-2">
-          <input type="submit" className="btnSubmit" value="Crear cuenta" />
+          <input type="submit" className="btnSubmit" value="Create account" />
         </div>
       </form>
     </div>
