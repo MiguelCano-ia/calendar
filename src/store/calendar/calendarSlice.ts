@@ -27,7 +27,6 @@ export const calendarSlice = createSlice({
     },
     onLoadEvents: (state, action: PayloadAction<CalendarEvent[]>) => {
       state.isLoadingEvents = false;
-      state.events = [];
       state.events = action.payload;
     },
     onLogoutCalendar: (state) => {

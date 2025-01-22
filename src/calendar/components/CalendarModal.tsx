@@ -78,7 +78,7 @@ export const CalendarModal = () => {
       id: activeEvent?.id || undefined,
       notes: data.notes ?? "",
       bgColor: "#fafafa",
-      user: { uid: user?.uid || "", name: user?.name || "" },
+      user: { _id: user?._id || "", name: user?.name || "" },
     });
     closeDateModal();
   };

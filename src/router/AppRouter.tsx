@@ -1,8 +1,9 @@
-import { useEffect } from "react";
 import { AuthPage } from "../auth";
-import { useAuthStore } from "../auth/hooks";
 import { CalendarPage } from "../calendar";
+import { CheckingAuth } from "../auth/components/CheckingAuth";
 import { Navigate, Route, Routes } from "react-router";
+import { useAuthStore } from "../auth/hooks";
+import { useEffect } from "react";
 
 export const AppRouter = () => {
   const { status, checkAuthToken } = useAuthStore();
@@ -12,7 +13,7 @@ export const AppRouter = () => {
   }, []);
 
   if (status === "checking") {
-    return <div>Loading...</div>;
+    return <CheckingAuth />;
   }
 
   return (

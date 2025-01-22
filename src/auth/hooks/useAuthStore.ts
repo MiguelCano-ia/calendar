@@ -24,11 +24,11 @@ export const useAuthStore = () => {
     dispatch(setChecking());
     try {
       const {
-        data: { name, token, uid },
+        data: { name, token, _id },
       } = await calendarApi.post("/auth", { email, password });
       localStorage.setItem("token", token);
       localStorage.setItem("token-init-date", new Date().getTime().toString());
-      dispatch(setAuthenticated({ name, token, uid }));
+      dispatch(setAuthenticated({ name, token, _id }));
     } catch {
       dispatch(setNotAuthenticated("Invalid credentials"));
       setTimeout(() => {
@@ -49,14 +49,14 @@ export const useAuthStore = () => {
     dispatch(setChecking());
     try {
       const {
-        data: { name: username, token, uid },
+        data: { name: username, token, _id },
       } = await calendarApi.post("/auth/new", {
         name,
         email,
         password,
       });
 
-      dispatch(setAuthenticated({ name: username, token, uid }));
+      dispatch(setAuthenticated({ name: username, token, _id }));
       localStorage.setItem("token", token);
       localStorage.setItem("token-init-date", new Date().getTime().toString());
     } catch (error) {
@@ -76,9 +76,9 @@ export const useAuthStore = () => {
 
     try {
       const {
-        data: { name, token: newToken, uid },
+        data: { name, token: newToken, _id },
       } = await calendarApi.get("/auth/renew");
-      dispatch(setAuthenticated({ name, token: newToken, uid }));
+      dispatch(setAuthenticated({ name, token: newToken, _id }));
       localStorage.setItem("token", newToken);
       localStorage.setItem("token-init-date", new Date().getTime().toString());
     } catch {

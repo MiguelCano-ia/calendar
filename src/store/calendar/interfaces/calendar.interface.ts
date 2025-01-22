@@ -12,7 +12,7 @@ export interface CalendarEvent {
   end: Date;
   bgColor: string;
   user: {
-    uid: string;
+    _id: string;
     name: string;
   };
 }

@@ -11,15 +11,19 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useCalendarStore, useUiStore } from "../../hooks";
 import { CalendarEvent as CalendarStore } from "../../store";
 import { useEffect } from "react";
+import { useAuthStore } from "../../auth/hooks";
 
 export const CalendarPage = () => {
   const { openDateModal } = useUiStore();
+  const { user } = useAuthStore();
   const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
   const lastView = localStorage.getItem("lastView") || "week";
 
-  const eventStyleGetter = () => {
+  const eventStyleGetter = (event: CalendarStore) => {
+    const isMyEvent = user._id === event.user._id;
+
     const style = {
-      backgroundColor: "#347CF7",
+      backgroundColor: isMyEvent ? "#347CF7" : "#465660",
       borderRadius: "0px",
       opacity: 0.8,
       color: "white",

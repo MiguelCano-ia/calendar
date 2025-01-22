@@ -31,7 +31,7 @@ export const useCalendarStore = () => {
       }
 
       const { data } = await calendarApi.post("/events", calendarEvent);
-      const userWithOutToken = { uid: user.uid || "", name: user.name || "" };
+      const userWithOutToken = { _id: user._id || "", name: user.name || "" };
       dispatch(
         onAddNewEvent({
           ...calendarEvent,
@@ -50,14 +50,12 @@ export const useCalendarStore = () => {
 
   const startDeletingEvent = async () => {
     try {
-      if (activeEvent) {
-        console.log(activeEvent);
-        await calendarApi.delete(`/events/${activeEvent.id}`);
-        dispatch(onDeleteEvent());
-      }
+      await calendarApi.delete(`/events/${activeEvent?.id}`);
+      dispatch(onDeleteEvent());
     } catch (error) {
-      console.log(error);
-      Swal.fire("Error deleting", "An error occurred", "error");
+      const errorMessage = (error as AxiosError<{ msg: string }>).response?.data
+        .msg;
+      Swal.fire("Error deleting", errorMessage, "error");
     }
   };
 
