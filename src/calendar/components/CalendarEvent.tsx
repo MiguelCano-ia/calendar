@@ -9,6 +9,11 @@ interface EventProps {
 
 export const CalendarEvent = ({ event }: EventProps) => {
   const { title, user } = event;
+
+  if (!user) {
+    return <>{title}</>;
+  }
+
   return (
     <>
       <strong>{title} -</strong>
